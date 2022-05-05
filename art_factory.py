@@ -6,6 +6,7 @@ layers_files = {}
 selected_image = {}
 output_file = "generated_nfts.json"
 base_dir = "layers"
+output_dir = "output/"
 files = os.listdir(f'./{base_dir}')
 rarity_index = 0
 
@@ -49,7 +50,7 @@ def merge_layers(layers):
 def save_image(image_name, image, layers):
     generated_nfts = get_generated_nfts()
     if image_name not in generated_nfts:
-        image.save(image_name)
+        image.save(output_dir + image_name)
         generated_nfts[image_name] = layers
         with open(output_file, "w") as f:
             f.write(json.dumps(generated_nfts))
@@ -66,5 +67,3 @@ def generate_unique_nft():
         return image
     else:
         return None
-
-generate_unique_nft()
