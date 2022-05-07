@@ -14,3 +14,6 @@
 - Rarity - For the individual layers, the is higher likelihood to get certain images than others, that is called digital rarity. We've implemented as: The first image in every layer collection has been set as the most rare. (That can hover be changed in _art_generator.py_)
 
 That is just a basic breakdown of all the indivual components of the project. I'll be preparing an in depth step by step tutorial of doing all this so watch out for that on my [Twitter](https://twitter.com/Grishonnganga)
+![Screenshot from 2022-05-07 10-07-55](https://user-images.githubusercontent.com/52824774/167243287-7d407977-a322-4986-9a3f-58ad59b7c1f4.png)
+![Screenshot from 2022-05-07 10-10-22](https://user-images.githubusercontent.com/52824774/167243284-8cba959b-c58e-494e-8471-daac4d0cd3c7.png)
+![Screenshot from 2022-05-07 10-11-22](https://user-images.githubusercontent.com/52824774/167243281-d6ea6e10-a049-43ef-be68-58e4a6d79a15.png)
