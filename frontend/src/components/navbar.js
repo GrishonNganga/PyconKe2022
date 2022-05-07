@@ -1,7 +1,7 @@
 import { BiWalletAlt } from 'react-icons/bi';
 import { FaUserSecret } from 'react-icons/fa'
 import { Wallet } from './wallet'
-export const Navbar = ({ user, setUser, showWallet, setShowWallet }) => {
+export const Navbar = ({ user, setUser, showWallet, setShowWallet, showPayment, setShowPayment, setLoading }) => {
 
     return (
         <div className="fixed w-full h-16 bg-purple-700 flex justify-between items-center px-4 md:px-24">
@@ -17,8 +17,8 @@ export const Navbar = ({ user, setUser, showWallet, setShowWallet }) => {
                         <FaUserSecret size={24} className="cursor-pointer"  onClick={()=>{setShowWallet(prevState=>(!prevState))}}/>
                     }
                     {
-                        showWallet &&
-                        <Wallet user={user} setUser={setUser}/>
+                        (showWallet || showPayment) &&
+                        <Wallet user={user} setUser={setUser} showPayment={showPayment} setShowPayment={setShowPayment} setLoading={setLoading}/>
                     }
                 </div>
             </div>

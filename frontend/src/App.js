@@ -7,17 +7,17 @@ import { Navbar } from './components/navbar'
 function App() {
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState(null)
+  const [nfts, setNfts] = useState([])
   const [showWallet, setShowWallet] = useState(false)
+  const [showPayment, setShowPayment] = useState(false)
 
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   useEffect(() => {
     const fetchNewToken = () => {
       refreshToken().then((response) => {
         console.log(response)
         if (response && response.status === 200) {
           setUser(response.data.user)
+          setNfts(response.data.nfts)
         }
       })
     }
@@ -25,27 +25,30 @@ function App() {
       refreshToken().then((response) => {
         if (response && response.status === 200) {
           setUser(response.data.user)
+          setNfts(response.data.nfts)
           setTimeout(fetchNewToken, 1.8e+6)
         }
       })
     } else {
       setTimeout(fetchNewToken, 1.8e+6)
     }
-  }, [user, setUser])
+  }, [user, setUser, nfts, setNfts])
+
 
   const generateNft = () => {
     if (user) {
-      setLoading(true);
-    }else{
+      setShowPayment(true)
+
+    } else {
       setShowWallet(true)
     }
   }
 
   return (
     <div className="w-full">
-      <Navbar user={user} setUser={setUser} showWallet={showWallet} setShowWallet={setShowWallet}/>
+      <Navbar user={user} setUser={setUser} showWallet={showWallet} setShowWallet={setShowWallet} showPayment={showPayment} setShowPayment={setShowPayment} setLoading={setLoading} />
       <div className="w-full h-screen pt-20 flex justify-center">
-        <div className="w-11/12 flex flex-col md:flex-row gap-y-4 gap-x-8  h-min">
+        <div className="w-11/12 flex flex-col md:flex-row gap-y-4 gap-x-8  h-min flex-wrap">
           <div className="w-full md:w-64 flex flex-col items-center justify-center border rounded-md">
             <div className="w-full bg-purple-100 flex justify-center rounded-md">
               <div>
@@ -73,6 +76,25 @@ function App() {
               }
             </div>
           </div>
+          {
+            user && nfts.length > 0 &&
+            nfts.map((nft, idx) => {
+              return (
+                <div key={idx} className="w-full md:w-64 flex flex-col items-center justify-center border rounded-md">
+                  <div className="w-full bg-purple-50 flex justify-center rounded-md">
+                    <div>
+                      <img src={nft["img"]} className="h-56 w-full object-cover rounded-md" />
+                    </div>
+                  </div>
+                  <div className="w-full px-4 py-1.5 flex flex-col">
+                    <div className="text-xl font-semibold">
+                      Collection #{nft["id"]}
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     </div>
